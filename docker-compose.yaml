@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  bot:
+    build: .
+    environment:
+      - DEBUG=false
+      - FILE_SECRETS=/run/secrets/secrets
+    secrets:
+      - secrets
+
+secrets:
+  secrets:
+    file: ./secrets.yaml
