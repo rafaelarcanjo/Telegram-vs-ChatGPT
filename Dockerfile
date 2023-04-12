@@ -5,7 +5,7 @@ ENV DEBUG=false
 
 RUN mkdir /app
 
-COPY main.py /app/main.py
+COPY *.py /app/
 COPY requirements.txt /app/requirements.txt
 
 RUN pip install -r /app/requirements.txt

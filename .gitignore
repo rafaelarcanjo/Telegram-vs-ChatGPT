@@ -1,1 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local env
+.env
+
+# Build files
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Compiled source files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# IDE / Editor files
+.idea/
+*.swp
+*.swo
+*.vscode/
+*.pydevproject
+.project
+.pytest_cache/
+__pycache__/
+.DS_Store
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Custom
 secrets.yaml
