@@ -8,6 +8,7 @@ services:
       - FILE_SECRETS=/run/secrets/secrets
     secrets:
       - secrets
+    restart: always
 
 secrets:
   secrets:
