@@ -11,10 +11,12 @@ class Telegram:
     def getUpdates(self):
         logging.info('Function __getUpdates__')
 
-        response = requests.get(self.TELEGRAM_URL + "getUpdates")
-        content = response.content.decode("utf8")
-
-        return json.loads(content)
+        try:
+            response = requests.get(self.TELEGRAM_URL + "getUpdates")
+            content = response.content.decode("utf8")
+            return json.loads(content)
+        except:
+            return None
     # END
 
     def getLastID(self, updates):
@@ -32,22 +34,28 @@ class Telegram:
     def getNextUpdate(self, id):
         logging.info('Function __getNextUpdate__')
 
-        response = requests.get(self.TELEGRAM_URL + "getUpdates?offset=" + str(id + 1))
-        content = response.content.decode("utf8")
-        js = json.loads(content)
+        try:
+            response = requests.get(self.TELEGRAM_URL + "getUpdates?offset=" + str(id + 1))
+            content = response.content.decode("utf8")
+            js = json.loads(content)
 
-        if js['ok'] == True:
-            return js
-        else:
+            if js['ok'] == True:
+                return js
+            else:
+                return None
+        except:
             return None
     # END
 
     def sendMessage(self, texto):
         logging.info('Function __sendMessage__')
 
-        parse = urllib.parse.quote_plus(texto)
-        url = self.TELEGRAM_URL + "sendMessage?text={}&chat_id={}".format(parse, self.TELEGRAM_ALLOW_ID)
-        return requests.get(url)
+        try:
+            parse = urllib.parse.quote_plus(texto)
+            url = self.TELEGRAM_URL + "sendMessage?text={}&chat_id={}".format(parse, self.TELEGRAM_ALLOW_ID)
+            return requests.get(url)
+        except:
+            return False
     # END
 
     def getPermission(self, update):
@@ -60,4 +68,3 @@ class Telegram:
         else:
             return False
     # END
-
