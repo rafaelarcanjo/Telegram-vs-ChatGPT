@@ -47,12 +47,12 @@ class Telegram:
             return None
     # END
 
-    def sendMessage(self, texto):
+    def sendMessage(self, texto, update):
         logging.info('Function __sendMessage__')
 
         try:
             parse = urllib.parse.quote_plus(texto)
-            url = self.TELEGRAM_URL + "sendMessage?text={}&chat_id={}".format(parse, self.TELEGRAM_ALLOW_ID)
+            url = self.TELEGRAM_URL + "sendMessage?text={}&chat_id={}".format(parse, str(update['message']['from']['id']))
             return requests.get(url)
         except:
             return False
@@ -60,8 +60,9 @@ class Telegram:
 
     def getPermission(self, update):
         logging.info('Function __getPermission__')
+        logging.debug('From: ' + str(update['message']['from']['id']))
 
-        if update['message']['from']['id'] == self.TELEGRAM_ALLOW_ID \
+        if str(update['message']['from']['id']) in self.TELEGRAM_ALLOW_ID \
             and not update['message']['from']['is_bot'] \
             and update['message']['chat']['type'] == 'private':
             return True

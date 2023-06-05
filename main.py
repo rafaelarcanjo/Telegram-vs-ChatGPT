@@ -32,7 +32,7 @@ def getConfig(file=None):
         
         TELEGRAM_TOKEN = config['secrets']['TELEGRAM_BOT_TOKEN']
 
-        ALLOW_ID = config['secrets']['TELEGRAM_ALLOW_ID']
+        ALLOW_ID = config['secrets']['TELEGRAM_ALLOW_ID'].split(",")
         OPENAI_API_KEY = config['secrets']['OPENAI_API_KEY']
     # END with
 # END
@@ -58,18 +58,16 @@ def main():
 
                 if telegram.getPermission(update):
                     message = chatGPT.getChat(text)
+                    telegram.sendMessage(message, update)
                 else:
                     logging.info('Unauthorized Telegram ID')
-                    message = 'Unauthorized Telegram ID!'
-
-                telegram.sendMessage(message)
             # END for
         time.sleep(0.5)
     # END while
 # END
 
 if __name__ == '__main__':
-    if DEBUG:
+    if (os.getenv("DEBUG") == "true"):
         logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     else:
         logging.basicConfig(stream=sys.stdout, level=logging.INFO)
