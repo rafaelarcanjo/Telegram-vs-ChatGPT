@@ -41,4 +41,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: cd /opt/telegram-chatbot && docker-compose up -d
+          script: |
+            cd /opt/telegram-chatbot
+            docker-compose down -v
+            docker-compose build
+            docker-compose up -d
