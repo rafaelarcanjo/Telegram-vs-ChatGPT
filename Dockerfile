@@ -1,4 +1,4 @@
-FROM python:alpine3.17
+FROM python:3.11-alpine3.18
 
 ENV FILE_SECRETS=/run/secrets/secrets.yaml
 ENV DEBUG=false
